@@ -1,0 +1,6 @@
+.idea
+.env
+.sonarlint
+.tox
+.pytest_cache
+**/*.egg-info

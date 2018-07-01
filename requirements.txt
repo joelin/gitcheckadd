@@ -1,0 +1,5 @@
+enum==0.4.6
+gitdb2==2.0.3
+GitPython==2.1.10
+PyYAML==3.12
+smmap2==2.0.3

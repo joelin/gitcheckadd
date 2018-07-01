@@ -1,0 +1,15 @@
+---
+file_whitelist:
+    - gradle/wrapper/gradle-wrapper.jar
+    - maven/maven-wrapper.jar
+# example 1000k default
+file_max_size: 1024000
+mime_blacklist:
+    - application/pdf
+    - application/msword
+    - application/java-archive
+    - application/java-vm
+    - application/java-serialized-object
+
+
+
