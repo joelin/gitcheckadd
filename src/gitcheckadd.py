@@ -42,6 +42,10 @@ example:
     print(help)
 
 
+global gfile_whitelist
+global gfile_max_size
+global gmime_blacklist
+
 gfile_whitelist = set(["gradle/wrapper/gradle-wrapper.jar", "maven/maven-wrapper.jar"])
 gfile_max_size = 1024000
 gmime_blacklist = set(["application/docx", "application/java-archive", "java-serialized-object", "java-vm"])
@@ -91,7 +95,6 @@ def init():
     defaultpath = "/etc/gitcheckadd/config.yaml"
     config = ""
     err_message = ""
-    print os.getcwd()
     if os.path.exists(defaultpath):
         stream = file(defaultpath, 'r')
         config = yaml.load(stream)
@@ -103,16 +106,19 @@ def init():
         sys.exit(1)
     if config:
         if config.has_key("file_whitelist") and config["file_whitelist"]:
+            global gfile_whitelist
             gfile_whitelist = set(config["file_whitelist"])
         else:
             err_message = err_message + " file_whitelist is not config\n"
 
         if config.has_key("mime_blacklist") and config["mime_blacklist"]:
+            global gmime_blacklist
             gmime_blacklist = set(config["mime_blacklist"])
         else:
             err_message = err_message + " mime_blacklist is not config\n"
 
         if config.has_key("file_max_size") and config["file_max_size"]:
+            global gfile_max_size
             gfile_max_size = config["file_max_size"]
     else:
         err_message = "config.yaml parser error"
@@ -166,7 +172,9 @@ def main():
 
     result = compare(ctype, source, dest, path)
 
-    print(result)
+    if result and len(result) > 0:
+        print(result)
+        sys.exit(1)
 
 
 if __name__ == '__main__':
