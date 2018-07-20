@@ -158,7 +158,7 @@ def main():
         if option in ("-p", "--path"):
             path = value
 
-    if dest == "" or source == "":
+    if ctype and ctype != "patchset" and (dest == "" or source == ""):
         print("dest or source is null")
         usage()
         sys.exit(1)
